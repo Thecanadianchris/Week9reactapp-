@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import products from './data/products';
+import products from '../data/products';
+import GalleryItem from '../components/GalleryItem';
+
 
 function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -38,12 +40,9 @@ function Gallery() {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '20px' }}>
         {filteredProducts.map((product) => (
-          <div key={product.id} style={{ width: '250px' }}>
-            <img src={product.image} alt={product.name} style={{ width: '100%' }} />
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-          </div>
+          <GalleryItem key={product.id} product={product} />
         ))}
+        
       </div>
     </div>
   );

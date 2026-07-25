@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import logo from './assets/images/eonlogo.png';
-import Home from './Home';
-import Gallery from './Gallery';
-import ResinFacts from './ResinFacts';
+import NavBar from './components/NavBar';
+import Home from './pages/Home';
+import Gallery from './pages/Gallery';
+import ResinFacts from './pages/ResinFacts';
 
 
 
@@ -11,20 +11,15 @@ function App() {
   
   return (
      <div>
-      <nav>
-        <img src={logo} alt="logo" style={{ height: '50px' }} />
-        <button onClick={() => setPage('home')}>Home</button>
-        <button onClick={() => setPage('gallery')}>Gallery</button>
-        <button onClick={() => setPage('facts')}>Resin Facts</button>
-      </nav>
+      <NavBar page={page} onSetPage={setPage} />
+
       {page === 'home' && <Home />}
       {page === 'gallery' && <Gallery />}
       {page === 'facts' && <ResinFacts />}
-      
     </div>
   );
 }
 
 export default App;
- 
+
 
