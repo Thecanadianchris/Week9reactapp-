@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  #root {
+    padding: 1rem;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+}
