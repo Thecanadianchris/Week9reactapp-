@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import logo from './assets/images/eonlogo.png';
 import Home from './Home';
 import Gallery from './Gallery';
 import ResinFacts from './ResinFacts';
@@ -11,6 +12,7 @@ function App() {
   return (
      <div>
       <nav>
+        <img src={logo} alt="logo" style={{ height: '50px' }} />
         <button onClick={() => setPage('home')}>Home</button>
         <button onClick={() => setPage('gallery')}>Gallery</button>
         <button onClick={() => setPage('facts')}>Resin Facts</button>
