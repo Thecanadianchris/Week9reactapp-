@@ -27,7 +27,7 @@ function ResinFacts() {
       
       setTimeout(() => {
         setWarning(null);
-      }, 5000);
+      }, 3000);
     }
 
 
