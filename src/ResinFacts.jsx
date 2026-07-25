@@ -2,18 +2,34 @@ import { useState } from 'react';
 import axios from 'axios';
 
 function ResinFacts() {
+  const [numberOfFacts, setNumberOfFacts] = useState('');
   const [facts, setFacts] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [error, setError] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [warning, setWarning] = useState(null);
   const [loading, setLoading] = useState(false);
 
 
-
-
+  const handleChange = (e) => {
+  setNumberOfFacts(e.target.value);
+  
+  };
 
   const handleLoadFacts = async () => {
     setLoading(true);
     setError(null);
+ 
+    let requestedNumber = Number(numberOfFacts);
+        if (requestedNumber > 20) {
+      requestedNumber = 20;
+      setWarning('Maximum of 20 facts at a time. Showing 20 facts.');
+
+      
+      setTimeout(() => {
+        setWarning(null);
+      }, 5000);
+    }
+
 
     try {
       const response = await axios.get(
@@ -25,12 +41,11 @@ function ResinFacts() {
 
 
       const decoded = atob(response.data.content);
-      const factsArray = JSON.parse(decoded);
-
+      const allFacts = JSON.parse(decoded);
+      const shuffledFacts = allFacts.sort(() => Math.random() - 0.5);
       
 
-      setFacts(factsArray);
-      setCurrentIndex(0);
+      setFacts(allFacts.slice(0, requestedNumber));
     } catch (err) {
       setError('Could not load resin facts. Please try again.');
     } finally {
@@ -50,21 +65,34 @@ function ResinFacts() {
 
   return (
     <div style={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
-      <h1>Resin Facts</h1>
+      <h1>300 Random Resin Facts</h1>
 
-      <button onClick={handleLoadFacts} disabled={loading}>
-        {loading ? 'Loading...' : 'Load Resin Facts'}
+      <input
+        type="number"
+        placeholder="How many facts?"
+        value={numberOfFacts}
+        onChange={handleChange}
+        style={{ padding: '8px', width: '100%' }}
+      />
+
+      <button onClick={handleLoadFacts} disabled={loading} style={{ marginTop: '10px' }}>
+        {loading ? 'Loading...' : 'Load Facts'}
       </button>
 
-      {error && <p>{error}</p>}
+      {warning && <p style={{ color: 'orange' }}>{warning}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       {facts.length > 0 && (
-        <div style={{ marginTop: '20px' }}>
-          <p>{facts[currentIndex]}</p>
-          <button onClick={handleNextFact}>Next Fact</button>
-        </div>
+        <ul style={{ marginTop: '20px' }}>
+          {facts.map((fact, index) => (
+            <li key={index}>{fact}</li>
+          ))}
+        </ul>
       )}
     </div>
+
+
+
   );
 }
 
