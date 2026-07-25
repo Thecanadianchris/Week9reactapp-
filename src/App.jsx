@@ -3,6 +3,7 @@ import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import ResinFacts from './pages/ResinFacts';
+import Challenges from './pages/Challenges';
 
 
 
@@ -16,6 +17,7 @@ function App() {
       {page === 'home' && <Home />}
       {page === 'gallery' && <Gallery />}
       {page === 'facts' && <ResinFacts />}
+      {page === 'projects' && <Challenges />}
     </div>
   );
 }

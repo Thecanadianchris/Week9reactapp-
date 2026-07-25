@@ -7,6 +7,7 @@ function NavBar({ page, onSetPage }) {
       <button onClick={() => onSetPage('home')}>Home</button>
       <button onClick={() => onSetPage('gallery')}>Gallery</button>
       <button onClick={() => onSetPage('facts')}>Resin Facts</button>
+       <button onClick={() => onSetPage('projects')}>My Projects</button>
     </nav>
   );
 }
